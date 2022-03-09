@@ -12,7 +12,6 @@ class TopScoreLadder extends StatelessWidget {
       width: 280.0,
       height: 240.0,
       child: Stack(
-        // ignore: prefer_const_literals_to_create_immutables
         children: [
           const Positioned(
             bottom: 0.0,

@@ -8,6 +8,7 @@ class ScoreListElement extends StatelessWidget {
   final int index;
   final ScoreDirection scoreDirection;
   final String username;
+  final String imgUrl;
   final int score;
 
   const ScoreListElement({
@@ -15,6 +16,7 @@ class ScoreListElement extends StatelessWidget {
     required this.index,
     required this.scoreDirection,
     required this.username,
+    required this.imgUrl,
     required this.score,
   }) : super(key: key);
 
@@ -35,70 +37,36 @@ class ScoreListElement extends StatelessWidget {
             ),
           ],
         ),
-        // SizedBox(
-        //   width: 240.0,
-        //   child: Stack(
-        //     children: [
-        //       ClipRRect(
-        //         borderRadius: BorderRadius.circular(20.0),
-        //         child: Container(
-        //           color: AppColors.onBackground,
-        //           width: 240.0,
-        //           height: 40.0,
-        //         ),
-        //       ),
-        //       const Positioned(
-        //         child: CircleAvatar(
-        //           backgroundImage:
-        //               AssetImage('assets/mock/pictures/profile-4.jpg'),
-        //         ),
-        //       ),
-        //       Padding(
-        //         padding: const EdgeInsets.only(left: AppSpacing.XL, top: 10.0),
-        //         child: Row(
-        //           mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //           children: [
-        //             Text('@' + username),
-        //             Text(
-        //               score.toString(),
-        //               style: const TextStyle(
-        //                 color: AppColors.accent,
-        //               ),
-        //             ),
-        //           ],
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
-        Padding(
-          padding: const EdgeInsets.only(left: AppSpacing.XL),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: Expanded(
-              child: Container(
-                color: AppColors.onBackground,
-                height: 40.0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CircleAvatar(
-                      backgroundImage:
-                          AssetImage('assets/mock/pictures/profile-4.jpg'),
-                    ),
-                    Text('@' + username),
-                    Padding(
-                      padding: const EdgeInsets.only(right: AppSpacing.XL),
-                      child: Text(
-                        score.toString(),
-                        style: const TextStyle(
-                          color: AppColors.accent,
-                        ),
-                      ),
-                    ),
-                  ],
+        const SizedBox(
+          width: AppSpacing.XL,
+        ),
+        Expanded(
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColors.onBackground,
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            padding: const EdgeInsets.only(right: AppSpacing.L),
+            height: 40.0,
+            child: Row(
+              children: [
+                // TODO : dynamic image
+                CircleAvatar(
+                  backgroundImage: AssetImage(imgUrl),
                 ),
-              ),
+                const SizedBox(
+                  width: AppSpacing.L,
+                ),
+                Expanded(
+                  child: Text('@' + username),
+                ),
+                Text(
+                  score.toString(),
+                  style: const TextStyle(
+                    color: AppColors.accent,
+                  ),
+                ),
+              ],
             ),
           ),
         ),

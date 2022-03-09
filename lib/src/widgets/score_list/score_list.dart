@@ -29,6 +29,7 @@ class ScoreList extends StatelessWidget {
               index: index,
               scoreDirection: ScoreDirection.rise,
               username: 'nancy',
+              imgUrl: 'assets/mock/pictures/profile-4.jpg',
               score: 1337,
             );
           },
