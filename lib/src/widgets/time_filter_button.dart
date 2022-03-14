@@ -12,20 +12,6 @@ class TimeFilterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return Container(
-    //   decoration: BoxDecoration(
-    //     borderRadius: BorderRadius.circular(20.0),
-    //     color: AppTheme.dark.primaryColor,
-    //   ),
-    //   padding: const EdgeInsets.symmetric(
-    //     horizontal: AppSpacing.L,
-    //     vertical: AppSpacing.S,
-    //   ),
-    //   child: Text(
-    //     text,
-    //     style: AppTheme.dark.textTheme.headline5,
-    //   ),
-    // );
     return TextButton(
       onPressed: () {
         print(text + " was pressed");
