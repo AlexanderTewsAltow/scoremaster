@@ -45,6 +45,8 @@ class _LeaderBoardPageState extends State<LeaderBoardPage> {
 
   @override
   Widget build(BuildContext context) {
+    // If data has not yet been retrieved by the service, then display a loader
+    // to provide the user with visual feedback
     if (!_initilized) {
       return Scaffold(
         appBar: AppBar(
@@ -61,6 +63,7 @@ class _LeaderBoardPageState extends State<LeaderBoardPage> {
       );
     }
 
+    // Data is available, render the leaderboard
     return Scaffold(
       appBar: AppBar(
         title: const Text('Leaderboard'),

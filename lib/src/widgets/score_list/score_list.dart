@@ -33,9 +33,8 @@ class ScoreList extends StatelessWidget {
             return ScoreListElement(
               index: index,
               scoreDirection: ScoreDirection.rise,
-              username: users[userScoreList[index + 3].key]?.username ?? 'Anon',
-              imgUrl: users[userScoreList[index + 3].key]?.imgUrl ??
-                  'assets/mock/pictures/default.jpg',
+              username: getUsernameByUid(userScoreList[index + 3].key),
+              imageUrl: getUserimageByUid(userScoreList[index + 3].key),
               score: userScoreList[index + 3].value,
             );
           },
@@ -51,4 +50,9 @@ class ScoreList extends StatelessWidget {
       colors: [AppColors.background, Colors.transparent],
     ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
   }
+
+  String getUsernameByUid(String userId) => users[userId]?.username ?? 'Anon';
+
+  String getUserimageByUid(String userId) =>
+      users[userId]?.imageUrl ?? 'assets/mock/pictures/default.jpg';
 }

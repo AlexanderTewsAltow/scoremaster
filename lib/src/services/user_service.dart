@@ -36,7 +36,7 @@ class UserService {
     usersList = usersList
         .map(
           (user) => user.copyWith(
-            imgUrl: 'assets/mock/pictures/profile-' +
+            imageUrl: 'assets/mock/pictures/profile-' +
                 (random.nextInt(7) + 1).toString() +
                 '.jpg',
           ),

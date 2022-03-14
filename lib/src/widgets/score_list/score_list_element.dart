@@ -8,7 +8,7 @@ class ScoreListElement extends StatelessWidget {
   final int index;
   final ScoreDirection scoreDirection;
   final String username;
-  final String imgUrl;
+  final String imageUrl;
   final int score;
 
   const ScoreListElement({
@@ -16,14 +16,13 @@ class ScoreListElement extends StatelessWidget {
     required this.index,
     required this.scoreDirection,
     required this.username,
-    required this.imgUrl,
+    required this.imageUrl,
     required this.score,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
           children: [
@@ -52,7 +51,7 @@ class ScoreListElement extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundColor: Colors.transparent,
-                  backgroundImage: AssetImage(imgUrl),
+                  backgroundImage: AssetImage(imageUrl),
                 ),
                 const SizedBox(
                   width: AppSpacing.L,
