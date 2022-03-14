@@ -4,9 +4,14 @@ import 'package:scoremaster/src/widgets/score_list/score_list_element.dart';
 import 'package:scoremaster/src/widgets/top_score/top_scorer_card.dart';
 
 import '../../config/app_spacing.dart';
+import '../../models/user/user_model.dart';
 
 class ScoreList extends StatelessWidget {
-  const ScoreList({Key? key}) : super(key: key);
+  final Map<String, UserModel> users;
+  final List<MapEntry<String, int>> userScoreList;
+
+  const ScoreList({Key? key, required this.users, required this.userScoreList})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +20,7 @@ class ScoreList extends StatelessWidget {
         shaderCallback: _bottomShadeOut,
         blendMode: BlendMode.dstIn,
         child: ListView.separated(
-          itemCount: 8,
+          itemCount: userScoreList.length > 3 ? userScoreList.length - 3 : 0,
           padding: const EdgeInsets.only(
             top: AppSpacing.XL,
             left: AppSpacing.XL,
@@ -28,9 +33,10 @@ class ScoreList extends StatelessWidget {
             return ScoreListElement(
               index: index,
               scoreDirection: ScoreDirection.rise,
-              username: 'nancy',
-              imgUrl: 'assets/mock/pictures/profile-4.jpg',
-              score: 1337,
+              username: users[userScoreList[index + 3].key]?.username ?? 'Anon',
+              imgUrl: users[userScoreList[index + 3].key]?.imgUrl ??
+                  'assets/mock/pictures/default.jpg',
+              score: userScoreList[index + 3].value,
             );
           },
         ),

@@ -1,11 +1,13 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:scoremaster/src/config/app_spacing.dart';
 import 'package:scoremaster/src/config/app_theme.dart';
-import 'package:scoremaster/src/widgets/score_list/score_list.dart';
+import 'package:scoremaster/src/services/score_service.dart';
+import 'package:scoremaster/src/services/user_service.dart';
 import 'package:scoremaster/src/widgets/time_filter_button.dart';
 import 'package:scoremaster/src/widgets/top_score/top_score_ladder.dart';
+
+import '../models/user/user_model.dart';
+import '../widgets/score_list/score_list.dart';
 
 class LeaderBoardPage extends StatefulWidget {
   const LeaderBoardPage({Key? key}) : super(key: key);
@@ -15,8 +17,50 @@ class LeaderBoardPage extends StatefulWidget {
 }
 
 class _LeaderBoardPageState extends State<LeaderBoardPage> {
+  bool _initilized = false;
+
+  Map<String, UserModel> users = {};
+  List<MapEntry<String, int>> userScoresList = [];
+
+  void getData() async {
+    users = await UserService.instance.asMap();
+    Map<String, int> scoresMappedToUId =
+        await ScoreService.instance.mappedToUid();
+
+    userScoresList = scoresMappedToUId.entries.toList()
+      ..sort(
+        (a, b) => b.value.compareTo(a.value),
+      );
+
+    setState(() {});
+
+    _initilized = true;
+  }
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (!_initilized) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Leaderboard'),
+          backgroundColor: AppTheme.dark.backgroundColor,
+          elevation: AppSpacing.ZERO,
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Center(child: CircularProgressIndicator()),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Leaderboard'),
@@ -40,9 +84,15 @@ class _LeaderBoardPageState extends State<LeaderBoardPage> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: AppSpacing.L),
-              child: TopScoreLadder(),
+              child: TopScoreLadder(
+                users: users,
+                userScoreList: userScoresList,
+              ),
             ),
-            ScoreList(),
+            ScoreList(
+              users: users,
+              userScoreList: userScoresList,
+            ),
           ], // Slivers
         ),
       ),

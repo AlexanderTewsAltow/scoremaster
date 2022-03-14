@@ -27,7 +27,7 @@ class ScoreListElement extends StatelessWidget {
       children: [
         Column(
           children: [
-            Text((index + 3).toString()),
+            Text((index + 4).toString()),
             Icon(
               _getIconFromScoreDirection(scoreDirection),
               size: 20.0,
@@ -50,8 +50,8 @@ class ScoreListElement extends StatelessWidget {
             height: 40.0,
             child: Row(
               children: [
-                // TODO : dynamic image
                 CircleAvatar(
+                  backgroundColor: Colors.transparent,
                   backgroundImage: AssetImage(imgUrl),
                 ),
                 const SizedBox(
