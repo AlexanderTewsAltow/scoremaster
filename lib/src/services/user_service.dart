@@ -1,7 +1,6 @@
 import 'dart:convert';
-import 'dart:ffi';
+import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:scoremaster/src/models/user/user_model.dart';
 
@@ -16,11 +15,35 @@ class UserService {
     return (await all()).firstWhere((user) => user.uid == uid);
   }
 
+  Future<Map<String, UserModel>> asMap() async {
+    Map<String, UserModel> uidToUser = {};
+    List<UserModel> users = await all();
+
+    for (UserModel user in users) {
+      uidToUser.putIfAbsent(user.uid, () => user);
+    }
+
+    return uidToUser;
+  }
+
   Future<List<UserModel>> all() async {
     String data = await rootBundle.loadString('assets/mock/data/users.json');
     final List jsonData = await jsonDecode(data);
-    final List<UserModel> usersList =
+    List<UserModel> usersList =
         jsonData.map((user) => UserModel.fromJson(user)).toList();
+
+    Random random = Random();
+    usersList = usersList
+        .map(
+          (user) => user.copyWith(
+            imgUrl: 'assets/mock/pictures/profile-' +
+                (random.nextInt(7) + 1).toString() +
+                '.jpg',
+          ),
+        )
+        .toList();
+
+    await Future.delayed(const Duration(seconds: 1), () => null);
 
     return usersList;
   }
