@@ -72,6 +72,7 @@ flutter:
     - assets/mock/data/scores.json
     - assets/mock/data/users.json
     # Images
+    - assets/mock/pictures/default.jpg
     - assets/mock/pictures/profile-1.jpg
     - assets/mock/pictures/profile-2.jpg
     - assets/mock/pictures/profile-3.jpg
