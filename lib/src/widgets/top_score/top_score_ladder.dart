@@ -29,8 +29,8 @@ class TopScoreLadder extends StatelessWidget {
               child: TopScorerCard(
                 place: 3,
                 scoreDirection: ScoreDirection.descent,
-                imageUrl: getUserimageByUid(userScoreList[2].key),
                 username: getUsernameByUid(userScoreList[2].key),
+                imageUrl: getUserImageByUid(userScoreList[2].key),
                 score: userScoreList[2].value,
               ),
             ),
@@ -41,7 +41,7 @@ class TopScoreLadder extends StatelessWidget {
               child: TopScorerCard(
                 place: 2,
                 scoreDirection: ScoreDirection.rise,
-                imageUrl: getUserimageByUid(userScoreList[1].key),
+                imageUrl: getUserImageByUid(userScoreList[1].key),
                 username: getUsernameByUid(userScoreList[1].key),
                 score: userScoreList[1].value,
               ),
@@ -50,7 +50,7 @@ class TopScoreLadder extends StatelessWidget {
             TopScorerCard(
               place: 1,
               scoreDirection: ScoreDirection.rise,
-              imageUrl: getUserimageByUid(userScoreList[0].key),
+              imageUrl: getUserImageByUid(userScoreList[0].key),
               username: getUsernameByUid(userScoreList[0].key),
               score: userScoreList.first.value,
             ),
@@ -61,6 +61,6 @@ class TopScoreLadder extends StatelessWidget {
 
   String getUsernameByUid(String userId) => users[userId]?.username ?? 'Anon';
 
-  String getUserimageByUid(String userId) =>
+  String getUserImageByUid(String userId) =>
       users[userId]?.imageUrl ?? 'assets/mock/pictures/default.jpg';
 }

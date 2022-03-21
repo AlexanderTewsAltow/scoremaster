@@ -10,14 +10,17 @@ class ScoreService {
 
   static ScoreService get instance => _instance;
 
-  Future<List<ScoreModel>> forUser(String userId) async {
-    return (await all()).where((score) => score.userUid == userId).toList();
+  Future<List<ScoreModel>> findByUserUid(String userUid) async {
+    return (await findAll())
+        .where((score) => score.userUid == userUid)
+        .toList();
   }
 
   Future<Map<String, int>> mappedToUid() async {
     Map<String, int> uidScoreMap = {};
+    List<ScoreModel> scores = await findAll();
 
-    for (var score in (await all())) {
+    for (var score in scores) {
       uidScoreMap.putIfAbsent(score.userUid, () => 0);
       uidScoreMap.update(score.userUid, (value) => score.score + value);
     }
@@ -25,8 +28,9 @@ class ScoreService {
     return uidScoreMap;
   }
 
-  Future<List<ScoreModel>> all() async {
-    String data = await rootBundle.loadString('assets/mock/data/scores.json');
+  Future<List<ScoreModel>> findAll() async {
+    final String data =
+        await rootBundle.loadString('assets/mock/data/scores.json');
     final List jsonData = await jsonDecode(data);
     final List<ScoreModel> scoresList =
         jsonData.map((score) => ScoreModel.fromJson(score)).toList();

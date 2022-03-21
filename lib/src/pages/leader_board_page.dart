@@ -17,7 +17,7 @@ class LeaderBoardPage extends StatefulWidget {
 }
 
 class _LeaderBoardPageState extends State<LeaderBoardPage> {
-  bool _initilized = false;
+  bool _initialized = false;
 
   Map<String, UserModel> users = {};
   List<MapEntry<String, int>> userScoresList = [];
@@ -32,9 +32,7 @@ class _LeaderBoardPageState extends State<LeaderBoardPage> {
         (a, b) => b.value.compareTo(a.value),
       );
 
-    setState(() {});
-
-    _initilized = true;
+    setState(() => _initialized = true);
   }
 
   @override
@@ -47,7 +45,7 @@ class _LeaderBoardPageState extends State<LeaderBoardPage> {
   Widget build(BuildContext context) {
     // If data has not yet been retrieved by the service, then display a loader
     // to provide the user with visual feedback
-    if (!_initilized) {
+    if (!_initialized) {
       return Scaffold(
         appBar: AppBar(
           title: const Text('Leaderboard'),

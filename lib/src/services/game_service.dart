@@ -11,18 +11,25 @@ class GameService {
 
   static GameService get instance => _instance;
 
-  Future<GameModel> findOne(String uid) async {
-    return (await all()).firstWhere((game) => game.uid == uid);
+  List<GameModel> games = [];
+
+  Future<GameModel> findByGameUid(String uid) async {
+    return (await findAll()).firstWhere((game) => game.uid == uid);
   }
 
-  Future<List<GameModel>> all() async {
-    String data = await rootBundle.loadString('assets/mock/data/games.json');
-    final List jsonData = await jsonDecode(data);
-    final List<GameModel> gamesList =
-        jsonData.map((game) => GameModel.fromJson(game)).toList();
+  Future<List<GameModel>> findAll() async {
+    if (games.isEmpty) {
+      final String _data =
+          await rootBundle.loadString('assets/mock/data/games.json');
+      final List _jsonData = await jsonDecode(_data);
+      final List<GameModel> _gamesList =
+          _jsonData.map((game) => GameModel.fromJson(game)).toList();
+
+      games = _gamesList;
+    }
 
     await Future.delayed(const Duration(seconds: 1), () {});
 
-    return gamesList;
+    return games;
   }
 }

@@ -34,7 +34,7 @@ class ScoreList extends StatelessWidget {
               index: index,
               scoreDirection: ScoreDirection.rise,
               username: getUsernameByUid(userScoreList[index + 3].key),
-              imageUrl: getUserimageByUid(userScoreList[index + 3].key),
+              imageUrl: getUserImageByUid(userScoreList[index + 3].key),
               score: userScoreList[index + 3].value,
             );
           },
@@ -53,6 +53,6 @@ class ScoreList extends StatelessWidget {
 
   String getUsernameByUid(String userId) => users[userId]?.username ?? 'Anon';
 
-  String getUserimageByUid(String userId) =>
+  String getUserImageByUid(String userId) =>
       users[userId]?.imageUrl ?? 'assets/mock/pictures/default.jpg';
 }

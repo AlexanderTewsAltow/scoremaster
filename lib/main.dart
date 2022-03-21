@@ -3,11 +3,11 @@ import 'package:scoremaster/src/config/app_theme.dart';
 import 'package:scoremaster/src/pages/leader_board_page.dart';
 
 void main() {
-  runApp(const Main());
+  runApp(const ScoremasterApp());
 }
 
-class Main extends StatelessWidget {
-  const Main({Key? key}) : super(key: key);
+class ScoremasterApp extends StatelessWidget {
+  const ScoremasterApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
